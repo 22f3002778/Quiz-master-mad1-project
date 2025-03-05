@@ -1,0 +1,92 @@
+{% extends 'admin_layout.html' %}
+
+{% block admin_content %}
+<div class="quiz-container">
+    <h1 class="quiz-title">Admin Dashboard - {{ name }}</h1>
+    <h2 class="text-primary">Subjects</h2>
+    <form method="POST" action="{{ url_for('search', name=name) }}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="search_txt" class="form-control quiz-input" placeholder="Search subjects, chapters, quizzes, or users...">
+            <button type="submit" class="btn btn-primary quiz-btn">Search</button>
+        </div>
+    </form>
+    <a href="{{ url_for('add_subject', name=name) }}" class="btn btn-success quiz-btn mb-3">+ New Subject</a>
+    <div class="row">
+        {% for subject in subjects %}
+        <div class="col-md-6">
+            <div class="card quiz-card">
+                <div class="card-header">
+                    <strong>{{ subject.name }}</strong> - {{ subject.description }}
+                </div>
+                <div class="card-body">
+                    <a href="{{ url_for('edit_subject', id=subject.id, name=name) }}" class="btn btn-warning btn-sm quiz-btn">Edit</a>
+                    <form action="{{ url_for('delete_subject', id=subject.id, name=name) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm quiz-btn" onclick="return confirm('Are you sure?');">Delete</button>
+                    </form>
+                    <a href="{{ url_for('add_chapter', subject_id=subject.id, name=name) }}" class="btn btn-success btn-sm quiz-btn">+ Chapter</a>
+                    <ul class="list-group mt-2">
+                        {% for chapter in subject.chapters %}
+                        <li class="list-group-item">
+                            {{ chapter.name }} - {{ chapter.description }}
+                            <a href="{{ url_for('edit_chapter', id=chapter.id, name=name) }}" class="text-warning">Edit</a> /
+                            <form action="{{ url_for('delete_chapter', id=chapter.id, name=name) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-link text-danger p-0" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Search Results Display (if applicable) -->
+    {% if chapters or quizzes or users or subjects %}
+    <h2 class="text-primary">Search Results</h2>
+    {% if subjects %}
+    <h3 class="text-primary">Subjects</h3>
+    <ul class="list-group">
+        {% for subject in subjects %}
+        <li class="list-group-item">{{ subject.name }} - {{ subject.description }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if chapters %}
+    <h3 class="text-primary">Chapters</h3>
+    <ul class="list-group">
+        {% for chapter in chapters %}
+        <li class="list-group-item">{{ chapter.name }} - {{ chapter.description }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if quizzes %}
+    <h3 class="text-primary">Quizzes</h3>
+    <ul class="list-group">
+        {% for quiz in quizzes %}
+        <li class="list-group-item">Quiz on {{ quiz.date_of_quiz }} - {{ quiz.remarks or "No remarks" }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if users %}
+    <h3 class="text-primary">Users</h3>
+    <ul class="list-group">
+        {% for user in users %}
+        <li class="list-group-item">{{ user.email }} - {{ user.full_name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+
+    <!-- Summary Charts (Plotly HTML) -->
+    <h2 class="text-primary mt-4">Summary Charts</h2>
+    <div class="row">
+        <div class="col-md-6">
+            {{ subject_attempts_chart|safe }}
+        </div>
+        <div class="col-md-6">
+            {{ user_activity_chart|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

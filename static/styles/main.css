@@ -1,0 +1,220 @@
+/* General Styling */
+body {
+    background-color: #f0f4f8; /* Light blue-gray background for all pages */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Background Image for Index and Base Pages */
+.bg-quiz-master {
+    background-image: url('../images/quiz-background.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional: Fixed background for scrolling */
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Light semi-transparent overlay for readability */
+.bg-quiz-master::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Lighter semi-transparent white overlay */
+    z-index: 1;
+}
+
+.bg-quiz-master .container {
+    position: relative;
+    z-index: 2;
+    color: #333; /* Dark text for readability over the white overlay */
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #007bff !important; /* Bright blue navbar */
+    margin-bottom: 0; /* Remove margin for seamless integration */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 3; /* Ensure navbar is above the overlay */
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important; /* White text for contrast with blue navbar */
+    opacity: 1 !important; /* Ensure full opacity for visibility */
+    pointer-events: auto !important; /* Ensure navbar links are interactive */
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #e9ecef !important; /* Light gray on hover */
+}
+
+/* Cards and Content */
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add subtle shadow for better readability */
+}
+
+.list-group-item {
+    background-color: #f8f9fa;
+    border: none;
+    border-bottom: 1px solid #e9ecef;
+    color: #333; /* Ensure list items are readable */
+}
+
+/* Forms and Buttons */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 8px;
+    opacity: 1 !important; /* Ensure buttons are fully opaque and clickable */
+    pointer-events: auto !important; /* Ensure buttons are interactive */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 8px;
+    opacity: 1 !important; /* Ensure buttons are fully opaque and clickable */
+    pointer-events: auto !important; /* Ensure buttons are interactive */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+.btn-success, .btn-danger, .btn-warning, .btn-info {
+    border-radius: 8px;
+    opacity: 1 !important; /* Ensure all buttons are interactive */
+    pointer-events: auto !important;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Headings and Text */
+h1, h2, h3, h4, h5, h6 {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.text-primary {
+    color: #007bff !important;
+}
+
+/* Quote Styling */
+.blockquote {
+    font-size: 1.25rem;
+    border-left: 5px solid #007bff;
+    padding-left: 15px;
+}
+
+.blockquote-footer {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Large Quote Styling for Half-Page Coverage */
+.quote-large {
+    padding: 40px 20px; /* Increase padding for larger quote area */
+    max-width: 800px; /* Limit width for better readability */
+    margin: 0 auto; /* Center the container */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly less opaque white for better background image visibility */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .navbar-brand, .nav-link {
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .blockquote {
+        font-size: 1rem;
+    }
+
+    .quote-large {
+        padding: 20px 10px; /* Reduce padding on mobile */
+        max-width: 100%; /* Full width on mobile */
+    }
+}
+
+/* Custom Classes for Quiz Theme */
+.quiz-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white for readability over background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-title {
+    color: #007bff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-label {
+    font-weight: 500;
+}
+
+.quiz-input, .quiz-btn {
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.quiz-input:focus, .quiz-btn:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}

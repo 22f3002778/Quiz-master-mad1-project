@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="mb-3">
+        <a href="{{ url_for('admin_dashboard', name=name) }}" class="btn btn-primary">Dashboard</a>
+        <a href="{{ url_for('quiz_dashboard', name=name) }}" class="btn btn-secondary">Quiz Management</a>
+    </div>
+    {% block admin_content %}{% endblock %}
+</div>
+{% endblock %}

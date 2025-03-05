@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Summary Charts{% endblock %}
+
+{% block content %}
+<h2 class="text-primary">Your Summary, {{ name }}</h2>
+<div class="row">
+    <div class="col-md-6">
+        {{ user_subject_scores_chart|safe }}
+    </div>
+    <div class="col-md-6">
+        {{ user_quiz_attempts_chart|safe }}
+    </div>
+</div>
+{% endblock %}

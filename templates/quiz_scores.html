@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Quiz Scores{% endblock %}
+
+{% block content %}
+<h2 class="text-primary">Your Quiz Scores, {{ name }}</h2>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Quiz ID</th>
+            <th>Subject</th>
+            <th>Chapter</th>
+            <th>Score</th>
+            <th>Attempted On</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in scores %}
+        <tr>
+            <td>{{ score.quiz.id }}</td>
+            <td>{{ score.quiz.chapter.subject.name }}</td>
+            <td>{{ score.quiz.chapter.name }}</td>
+            <td>{{ score.total_scored }}</td>
+            <td>{{ score.time_stamp_of_attempt }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('user_dashboard', name=name) }}" class="btn btn-secondary">Back</a>
+{% endblock %}

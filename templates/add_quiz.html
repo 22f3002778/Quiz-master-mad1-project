@@ -1,0 +1,29 @@
+{% extends 'admin_layout.html' %}
+
+{% block admin_content %}
+<h2 class="text-primary">Add Quiz</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Date of Quiz</label>
+        <input type="date" name="date_of_quiz" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Time Duration (HH:MM)</label>
+        <input type="text" name="time_duration" class="form-control" placeholder="e.g., 00:30" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Remarks</label>
+        <textarea name="remarks" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Chapter</label>
+        <select name="chapter_id" class="form-control" required>
+            {% for chapter in chapters %}
+            <option value="{{ chapter.id }}">{{ chapter.name }} ({{ chapter.subject.name }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Quiz</button>
+    <a href="{{ url_for('quiz_dashboard', name=name) }}" class="btn btn-secondary">Back</a>
+</form>
+{% endblock %}

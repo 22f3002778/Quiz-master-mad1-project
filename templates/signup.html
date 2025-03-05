@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="quiz-container">
+    <h2 class="quiz-title">Sign Up</h2>
+    {% if msg %}
+        <div class="alert alert-{{ 'success' if msg == 'Registered Successfully!' else 'danger' }}">{{ msg }}</div>
+    {% endif %}
+    <form method="POST" action="{{ url_for('signup') }}">
+        <div class="mb-3">
+            <label for="user_name" class="form-label quiz-label">Email</label>
+            <input type="email" class="form-control quiz-input" id="user_name" name="user_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label quiz-label">Password</label>
+            <input type="password" class="form-control quiz-input" id="password" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="full_name" class="form-label quiz-label">Full Name</label>
+            <input type="text" class="form-control quiz-input" id="full_name" name="full_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="qualifications" class="form-label quiz-label">Qualifications</label>
+            <input type="text" class="form-control quiz-input" id="qualifications" name="qualifications" required>
+        </div>
+        <div class="mb-3">
+            <label for="dob" class="form-label quiz-label">Date of Birth (YYYY-MM-DD)</label>
+            <input type="date" class="form-control quiz-input" id="dob" name="dob" required>
+        </div>
+        <button type="submit" class="btn btn-primary quiz-btn">Sign Up</button>
+        <a href="{{ url_for('signin') }}" class="btn btn-secondary quiz-btn">Login</a>
+    </form>
+</div>
+{% endblock %}

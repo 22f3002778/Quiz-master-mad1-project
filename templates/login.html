@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="quiz-container">
+    <h2 class="quiz-title">Login</h2>
+    <form method="POST" action="{{ url_for('signin') }}">
+        <div class="mb-3">
+            <label for="user_name" class="form-label quiz-label">Email</label>
+            <input type="email" class="form-control quiz-input" id="user_name" name="user_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label quiz-label">Password</label>
+            <input type="password" class="form-control quiz-input" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary quiz-btn">Login</button>
+        <a href="{{ url_for('signup') }}" class="btn btn-secondary quiz-btn">Sign Up</a>
+    </form>
+</div>
+{% endblock %}

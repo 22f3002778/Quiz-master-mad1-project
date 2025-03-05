@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Attempt Quiz{% endblock %}
+
+{% block content %}
+<h2 class="text-primary">Quiz: {{ quiz.chapter.name }} ({{ quiz.chapter.subject.name }})</h2>
+<p>Duration: {{ quiz.time_duration }} (Timer: <span id="timer">Loading...</span>)</p>
+<form method="POST" id="quizForm">
+    {% for question in questions %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>{{ question.question_statement }}</h5>
+            <div class="form-check">
+                <input type="radio" name="question_{{ question.id }}" value="1" class="form-check-input" required>
+                <label class="form-check-label">{{ question.option1 }}</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="question_{{ question.id }}" value="2" class="form-check-input">
+                <label class="form-check-label">{{ question.option2 }}</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="question_{{ question.id }}" value="3" class="form-check-input">
+                <label class="form-check-label">{{ question.option3 }}</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="question_{{ question.id }}" value="4" class="form-check-input">
+                <label class="form-check-label">{{ question.option4 }}</label>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit Quiz</button>
+    <a href="{{ url_for('user_dashboard', name=name) }}" class="btn btn-secondary">Back</a>
+</form>
+
+<script>
+    // Parse time_duration (e.g., "00:30") into seconds
+    const [hours, minutes] = "{{ quiz.time_duration }}".split(":");
+    let timeLeft = parseInt(hours) * 3600 + parseInt(minutes) * 60; // Convert to seconds
+    const timerElement = document.getElementById("timer");
+
+    function updateTimer() {
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            document.getElementById("quizForm").submit(); // Auto-submit when time's up
+        } else {
+            const hoursLeft = Math.floor(timeLeft / 3600);
+            const minutesLeft = Math.floor((timeLeft % 3600) / 60);
+            const secondsLeft = timeLeft % 60;
+            timerElement.textContent = `${String(hoursLeft).padStart(2, '0')}:${String(minutesLeft).padStart(2, '0')}:${String(secondsLeft).padStart(2, '0')}`;
+            timeLeft--;
+        }
+    }
+
+    // Start the timer immediately and update every second
+    updateTimer();
+    const timer = setInterval(updateTimer, 1000);
+</script>
+{% endblock %}
